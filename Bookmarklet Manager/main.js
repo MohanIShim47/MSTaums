@@ -34,7 +34,7 @@
     top: "12px",
     left: "12px",
     color: "rgba(255,255,255,0.7)",
-    marginLeft: "70px",
+    marginLeft: "69px",
   });
   box.appendChild(logo);
 
@@ -57,22 +57,25 @@
   box.appendChild(container);
 
   const bookmarklets = {
-    "IXLambda Loader": function () {
+    "IXLambda Loader : SUMO": function () {
       var script = document.createElement("script");
       script.src = "https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/main.js";
       document.head.appendChild(script);
+      console.log("IXLambda Loader by SUMO loaded!");
     },
 
-    "Executor by X-Gui": function () {
+    "Executor : X-Gui": function () {
       var s = document.createElement("script");
       s.src = "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js";
       document.body.appendChild(s);
+      console.log("Executor by X-Gui loaded!");
     },
 
-    "Blooket Hacks by X-Gui": function () {
+    "Blooket Hacks : X-Gui": function () {
       var s = document.createElement("script");
       s.src = "https://gl.githack.com/CidCaribou/x-gui/-/raw/main/x-gui.js";
       document.body.appendChild(s);
+      console.log("Blooket Hacks loaded!");
     }
   };
 
