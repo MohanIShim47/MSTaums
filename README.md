@@ -1,5 +1,5 @@
 
-# MSTauams
+# MSTaums v2.0
 
 <img src="icon.png" style="width: 100px;">
 
