@@ -1,5 +1,4 @@
 # MSTaums v3
-<img src="icon.png" />
 ## How to use MSTaums <br>Pronounced "Ehm-Ess-Tomes"
 Copy the code below and paste it into the url input of your bookmarklet. If you are having trouble check out Bookmarklet Manager/ReadMe.md to see further instructions.
 ```js
