@@ -1,1 +1,0 @@
-javascript:(function()%7Bvar script %3D document.createElement("script")%3B%0Ascript.src %3D "https%3A%2F%2Fraw-githack-com.translate.goog%2FMohanIShim47%2FMSTaums%2Fmain%2FBookmarklet%2520Manager%2Fmain.js"%3B%0Adocument.head.appendChild(script)%3B%7D)()

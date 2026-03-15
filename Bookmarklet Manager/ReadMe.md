@@ -1,6 +1,6 @@
-# The Bookmarklet Manager | MSTaums v4.5
+# The Bookmarklet Manager | Scriptix v4.5
 
-MSTaums v4.5 is a bookmarklet that manages other bookmarklets using jquery for the ui, js for the coding language, and Katnaya bookmarklet generator.
+Scriptix v4.5 is a bookmarklet that manages other bookmarklets using jquery for the ui, js for the coding language, and Katnaya bookmarklet generator.
 
 ## How to use
 1. Go to Bookmarklet.js

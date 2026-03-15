@@ -173,7 +173,7 @@ ui.innerHTML = `
 <div id="ms-script-list">
 
 <div id="ms-buttons">
-<button id="ms-taums-launch">MSTaums</button>
+<button id="ms-taums-launch">Scriptix</button>
 </div>
 </div>
 

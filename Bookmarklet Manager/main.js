@@ -1,6 +1,6 @@
 (function(){
 
-console.log("%cMSTaums Loaded!!", "font-size:20px;font-weight:bold;color:#8a5cff")
+console.log("%cScriptix Loaded!!", "font-size:20px;font-weight:bold;color:#8a5cff")
 console.log("%cby T.E.D.A", "font-size:13px;font-weight:bold;color:#44aaa4");                                               
 console.log("%cUse Wisely", "font-size:15px;font-weight:bold;color:#42c1a4");
 
@@ -12,7 +12,7 @@ slucide.onload = () => {
 document.head.appendChild(slucide);
 
 
-if(document.getElementById("mstaums-ui")) return;
+if(document.getElementById("Scriptix-ui")) return;
 
 const style=document.createElement("style");
 
@@ -28,7 +28,7 @@ style.textContent=`
 --ms-font: "Iosevka Charon Mono", monospace;
 }
 
-#mstaums-ui{
+#scriptix-ui{
 position:fixed;
 top:80px;
 left:120px;
@@ -47,13 +47,13 @@ overflow:hidden;
 transition:height .25s cubic-bezier(.4,0,.2,1),width .2s ease;
 }
 
-#mstaums-ui.minimized{
+#scriptix-ui.minimized{
 height:40px !important;
 overflow:hidden;
 }
 
-#mstaums-ui.minimized .ms-layout,
-#mstaums-ui.minimized .ms-resizer{
+#scriptix-ui.minimized .ms-layout,
+#scriptix-ui.minimized .ms-resizer{
 display:none;
 }
 
@@ -244,7 +244,7 @@ cursor:pointer;
 document.head.appendChild(style);
 
 const ui=document.createElement("div");
-ui.id="mstaums-ui";
+ui.id="scriptix-ui";
 
 ui.innerHTML=`
 
@@ -257,16 +257,16 @@ ui.innerHTML=`
 <div class="ms-btn ms-min"></div>
 </div>
 
-<img class="ms-icon" src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/MSTaums/main/icon.png">
+<img class="ms-icon" src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/Scriptix/main/icon.png">
 
-<div class="ms-title">MSTaums v4.5</div>
+<div class="ms-title">Scriptix v4.5</div>
 </div>
 
 <div class="ms-layout">
 
 <div class="ms-sidebar">
 
-<input id="mstaums-search" placeholder="Search Scripts.." style="
+<input id="scriptix-search" placeholder="Search Scripts.." style="
 margin-bottom:12px;
 padding:10px;
 border-radius:8px;
@@ -289,7 +289,7 @@ font-family: var(--ms-font);
 
 <div class="ms-page active" id="home">
 
-<div class="ms-header">Welcome to MSTaums v4.5</div>
+<div class="ms-header">Welcome to Scriptix v4.5</div>
 
 <div style="
 background:var(--ms-surface);
@@ -300,7 +300,7 @@ font-size:13px;
 color: var(--ms-text)
 ">
 
-<p><b>MSTaums v4.5</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
+<p><b>Scriptix v4.5</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
 
 <p>This interface works like a lightweight script hub with modules organized into categories.</p>
 
@@ -370,7 +370,7 @@ color: var(--ms-text)
 ">
 <b><i class="fa-solid fa-gear"></i> Settings</b>
 <p style="font-size:12px;opacity:.8">
-Customize themes and preferences for MSTaums v4.5.
+Customize themes and preferences for Scriptix v4.5.
 </p>
 </div>
 
@@ -418,7 +418,7 @@ Tip: Use <b>Ctrl + K</b> to quickly focus the search bar.
 <div class="ms-page" id="tools">
 <div class="ms-header">Tools</div>
 <button class="ms-button" data-action="devc">Dev Console</button>
-<button class="ms-button" data-action="users">MSTaums Userscript Loader</button>
+<button class="ms-button" data-action="users">Scriptix Userscript Loader</button>
 </div>
 
 <div class="ms-page" id="settings">
@@ -520,13 +520,13 @@ document.head.appendChild(s);
 
 if (action==="users") {
 const s=document.createElement("script");
-s.src="https://raw-githack-com.translate.goog/MohanIShim47/MSTaums/main/Bookmarklet%20Manager/userscripts.js"
+s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/userscripts.js"
 document.head.appendChild(s);
 }
 
 if (action==="tab") {
 const s=document.createElement("script");
-s.src="https://raw-githack-com.translate.goog/MohanIShim47/MSTaums/main/scripts/tabdisguise.js"
+s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/scripts/tabdisguise.js"
 document.head.appendChild(s);
 }
 
@@ -597,10 +597,10 @@ const selector=document.getElementById("theme-selector");
 selector.onchange=()=>{
 const theme=selector.value;
 setTheme(theme);
-localStorage.setItem("mstaums-theme",theme);
+localStorage.setItem("scriptix-theme",theme);
 };
 
-const saved=localStorage.getItem("mstaums-theme");
+const saved=localStorage.getItem("scriptix-theme");
 
 if(saved){
 setTheme(saved);
@@ -624,10 +624,10 @@ const fselector=document.getElementById("font-selector");
 fselector.onchange=()=>{
 const font=fselector.value;
 setFont(font);
-localStorage.setItem("mstaums-font",font);
+localStorage.setItem("scriptix-font",font);
 };
 
-const fsaved=localStorage.getItem("mstaums-font");
+const fsaved=localStorage.getItem("scriptix-font");
 
 if(fsaved){
 setFont(fsaved);
