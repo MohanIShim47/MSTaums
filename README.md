@@ -2,7 +2,7 @@
 
 <img src="icon.png" style="width: 100px;">
 
-## How to use Scriptix v4.5 <br> Pronounced "Ehm-Ess-Tomes"
+## How to use Scriptix v4.5
 Copy the code below and paste it into the url input of your bookmarklet. If you are having trouble check out Bookmarklet Manager/ReadMe.md to see further instructions.
 
 ## License for Scriptix
