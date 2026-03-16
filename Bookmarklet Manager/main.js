@@ -11,8 +11,7 @@ slucide.onload = () => {
 };
 document.head.appendChild(slucide);
 
-
-if(document.getElementById("Scriptix-ui")) return;
+if(document.getElementById("scriptix-ui")) return;
 
 const style=document.createElement("style");
 
@@ -32,11 +31,12 @@ style.textContent=`
 position:fixed;
 top:80px;
 left:120px;
-width:900px;
+width:1000px;
 height:520px;
 z-index:999999;
 background:var(--ms-bg);
-backdrop-filter:blur(18px);
+backdrop-filter:blur(20px) saturate(140%);
+-webkit-backdrop-filter:blur(20px) saturate(140%);
 border-radius:16px;
 border:1px solid rgba(255,255,255,.08);
 box-shadow:0 5px 10px var(--ms-accent);
@@ -55,6 +55,16 @@ overflow:hidden;
 #scriptix-ui.minimized .ms-layout,
 #scriptix-ui.minimized .ms-resizer{
 display:none;
+}
+
+#scriptix-ui.closing{
+width:220px !important;
+height:40px !important;
+transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+
+#scriptix-ui.restoring{
+transition:all .25s cubic-bezier(.4,0,.2,1);
 }
 
 .ms-resizer{
@@ -234,9 +244,9 @@ font-family: var(--ms-font);
 cursor:pointer;
 }
 
-#theme-selecter:hover, 
+#theme-selector:hover, 
 #font-selector:hover {
-    background:var(--ms-hover);
+background:var(--ms-hover);
 }
 
 `;
@@ -300,9 +310,21 @@ font-size:13px;
 color: var(--ms-text)
 ">
 
-<p><b>Scriptix v4.5</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
-
-<p>This interface works like a lightweight script hub with modules organized into categories.</p>
+<div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;
+@media (max-width:600px){
+  div[style*="display:flex"]{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+}
+">
+    <img style="height:100px; border-radius:8px;" src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/Scriptix/main/icon.png">
+    <div>
+        <p><b>Scriptix v4.5</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
+        <p>This interface works like a lightweight script hub with modules organized into categories.</p>
+    </div>
+</div>
 
 </div>
 
@@ -430,7 +452,6 @@ Tip: Use <b>Ctrl + K</b> to quickly focus the search bar.
 <option value="dark">Dark</option>
 <option value="light">Light</option>
 <option value="hack">Hack</option>
-<option value="childs">Child's Support</option>
 </select>
 
 <div class="ms-header">Font</div>
@@ -532,62 +553,72 @@ document.head.appendChild(s);
 
 });
 
+const search = document.getElementById("scriptix-search");
+
+search.addEventListener("input", () => {
+    const query = search.value.toLowerCase();
+
+    document.querySelectorAll(".ms-button").forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? "flex" : "none";
+    });
+});
+
+document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        search.focus();
+    }
+});
+
 function setTheme(theme){
 
 const root=document.documentElement;
+const a=(r,g,b,o)=>`rgba(${r},${g},${b},${o})`;
 
 if(theme==="macchiato"){
-root.style.setProperty("--ms-bg","#1e1e2e");
-root.style.setProperty("--ms-bar","#181825");
-root.style.setProperty("--ms-surface","#313244");
-root.style.setProperty("--ms-hover","#45475a");
-root.style.setProperty("--ms-text","#cdd6f4");
-root.style.setProperty("--ms-accent","#89b4fa");
+root.style.setProperty("--ms-bg", a(36,39,58,.65));
+root.style.setProperty("--ms-bar", a(30,32,48,.75));
+root.style.setProperty("--ms-surface", a(54,58,79,.55));
+root.style.setProperty("--ms-hover", a(73,77,100,.7));
+root.style.setProperty("--ms-text","#cad3f5");
+root.style.setProperty("--ms-accent","#8aadf4");
 }
 
 if(theme==="mocha"){
-root.style.setProperty("--ms-bg","rgba(30,30,46,.65)");
-root.style.setProperty("--ms-bar","rgba(24,24,37,.75)");
-root.style.setProperty("--ms-surface","rgba(49,50,68,.55)");
-root.style.setProperty("--ms-hover","rgba(69,71,90,.7)");
+root.style.setProperty("--ms-bg", a(30,30,46,.65));
+root.style.setProperty("--ms-bar", a(24,24,37,.75));
+root.style.setProperty("--ms-surface", a(49,50,68,.55));
+root.style.setProperty("--ms-hover", a(69,71,90,.7));
 root.style.setProperty("--ms-text","#cdd6f4");
 root.style.setProperty("--ms-accent","#b4befe");
 }
 
 if(theme==="dark"){
-root.style.setProperty("--ms-bg","rgba(18,18,20,.7)");
-root.style.setProperty("--ms-bar","rgba(30,30,32,.8)");
-root.style.setProperty("--ms-surface","rgba(45,45,48,.6)");
-root.style.setProperty("--ms-hover","rgba(70,70,75,.7)");
+root.style.setProperty("--ms-bg", a(18,18,20,.65));
+root.style.setProperty("--ms-bar", a(30,30,32,.75));
+root.style.setProperty("--ms-surface", a(45,45,48,.55));
+root.style.setProperty("--ms-hover", a(70,70,75,.7));
 root.style.setProperty("--ms-text","#ffffff");
 root.style.setProperty("--ms-accent","#ffffff7a");
 }
 
 if(theme==="light"){
-root.style.setProperty("--ms-bg","rgba(245,245,245,.8)");
-root.style.setProperty("--ms-bar","rgba(225,225,225,.85)");
-root.style.setProperty("--ms-surface","rgba(189, 189, 189, 0.7)");
-root.style.setProperty("--ms-hover","rgba(210,210,210,.7)");
+root.style.setProperty("--ms-bg", a(245,245,245,.6));
+root.style.setProperty("--ms-bar", a(225,225,225,.7));
+root.style.setProperty("--ms-surface", a(200,200,200,.5));
+root.style.setProperty("--ms-hover", a(210,210,210,.7));
 root.style.setProperty("--ms-text","#222");
-root.style.setProperty("--ms-accent","#ffffff7a");
+root.style.setProperty("--ms-accent","#888");
 }
 
 if(theme==="hack"){
-root.style.setProperty("--ms-bg","rgba(0,0,0,.75)");
-root.style.setProperty("--ms-bar","rgba(0,0,0,.9)");
-root.style.setProperty("--ms-surface","rgba(0,0,0,.65)");
-root.style.setProperty("--ms-hover","rgba(20,20,20,.9)");
+root.style.setProperty("--ms-bg", a(0,0,0,.7));
+root.style.setProperty("--ms-bar", a(0,0,0,.85));
+root.style.setProperty("--ms-surface", a(0,0,0,.6));
+root.style.setProperty("--ms-hover", a(20,20,20,.75));
 root.style.setProperty("--ms-text","#15ff00");
 root.style.setProperty("--ms-accent","#15ff00");
-}
-
-if(theme==="childs"){
-root.style.setProperty("--ms-bg","#7dc4e4");
-root.style.setProperty("--ms-bar","#8aadf4");
-root.style.setProperty("--ms-surface","#939ab7");
-root.style.setProperty("--ms-hover","#b7bdf8");
-root.style.setProperty("--ms-text","#cad3f5");
-root.style.setProperty("--ms-accent","rgb(238, 153, 160)");
 }
 
 }
@@ -634,41 +665,20 @@ setFont(fsaved);
 fselector.value=fsaved;
 }
 
-let resizing=false;
-let dragging=false;
-let offsetX,offsetY;
+let resizing = false;
+let dragging = false;
+let offsetX = 0, offsetY = 0;
 
-const resizer=ui.querySelector(".ms-resizer");
-const titlebar=ui.querySelector(".ms-titlebar");
+const resizer = ui.querySelector(".ms-resizer");
+const titlebar = ui.querySelector(".ms-titlebar");
 
-resizer.onmousedown=()=>resizing=true;
+ui.querySelector(".ms-close").onclick=()=>{
+ui.classList.add("closing");
 
-titlebar.onmousedown=e=>{
-dragging=true;
-offsetX=e.clientX-ui.offsetLeft;
-offsetY=e.clientY-ui.offsetTop;
+setTimeout(()=>{
+ui.remove();
+},250);
 };
-
-document.addEventListener("mousemove",e=>{
-
-if(resizing){
-ui.style.width=Math.max(600,e.clientX-ui.offsetLeft)+"px";
-ui.style.height=Math.max(400,e.clientY-ui.offsetTop)+"px";
-}
-
-if(dragging){
-ui.style.left=(e.clientX-offsetX)+"px";
-ui.style.top=(e.clientY-offsetY)+"px";
-}
-
-});
-
-document.addEventListener("mouseup",()=>{
-resizing=false;
-dragging=false;
-});
-
-ui.querySelector(".ms-close").onclick=()=>ui.remove();
 
 let minimized=false;
 
@@ -676,27 +686,81 @@ ui.querySelector(".ms-min").onclick=()=>{
 
 if(!minimized){
 
-ui.dataset.prevHeight=ui.offsetHeight+"px";
+ui.dataset.prevWidth = ui.offsetWidth + "px";
+ui.dataset.prevHeight = ui.offsetHeight + "px";
+
+ui.style.width = "220px";
+ui.style.height = "40px";
+
 ui.classList.add("minimized");
 minimized=true;
 
 }else{
 
 ui.classList.remove("minimized");
-ui.style.height=ui.dataset.prevHeight;
+
+ui.style.width = ui.dataset.prevWidth;
+ui.style.height = ui.dataset.prevHeight;
+
+ui.classList.add("restoring");
+
+setTimeout(()=>{
+ui.classList.remove("restoring");
+},250);
+
 minimized=false;
 
 }
 
 };
 
-titlebar.addEventListener("dblclick",()=>{
+/* ---------- DESKTOP ---------- */
+resizer.addEventListener("mousedown", () => resizing = true);
 
-if(ui.classList.contains("minimized")){
-ui.classList.remove("minimized");
-minimized=false;
-}
-
+titlebar.addEventListener("mousedown", (e) => {
+    dragging = true;
+    offsetX = e.clientX - ui.offsetLeft;
+    offsetY = e.clientY - ui.offsetTop;
 });
+
+document.addEventListener("mousemove", (e) => {
+    if (resizing) {
+        ui.style.width = Math.max(600, e.clientX - ui.offsetLeft) + "px";
+        ui.style.height = Math.max(400, e.clientY - ui.offsetTop) + "px";
+    }
+
+    if (dragging) {
+        ui.style.left = (e.clientX - offsetX) + "px";
+        ui.style.top = (e.clientY - offsetY) + "px";
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    resizing = false;
+    dragging = false;
+});
+
+/* ---------- MOBILE / TOUCH ---------- */
+titlebar.addEventListener("touchstart", (e) => {
+    dragging = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - ui.offsetLeft;
+    offsetY = touch.clientY - ui.offsetTop;
+});
+
+document.addEventListener("touchmove", (e) => {
+    if (!dragging) return;
+
+    const touch = e.touches[0];
+    ui.style.left = (touch.clientX - offsetX) + "px";
+    ui.style.top = (touch.clientY - offsetY) + "px";
+}, { passive: false });
+
+document.addEventListener("touchend", () => {
+    dragging = false;
+});
+
+
+
 
 })();

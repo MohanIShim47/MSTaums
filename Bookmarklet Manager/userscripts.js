@@ -163,7 +163,7 @@ ui.id = "ms-userscripts";
 
 ui.innerHTML = `
 <header>
-  <span style="flex:1">MST UserScripts Manger</span>
+  <span style="flex:1">Scriptix UserScript Manger</span>
   <button id="ms-min">-</button>
   <button id="ms-close">×</button>
 </header>
