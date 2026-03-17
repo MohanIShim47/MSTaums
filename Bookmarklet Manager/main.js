@@ -540,7 +540,7 @@ const s=document.createElement("script");
 s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/userscripts.js"
 document.head.appendChild(s);
 }
-
+// Meow :3
 if (action==="tab") {
 const s=document.createElement("script");
 s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/scripts/tabdisguise.js"
