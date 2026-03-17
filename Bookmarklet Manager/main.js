@@ -527,7 +527,7 @@ shadow.addEventListener("click",e=>{
   function load(src) {
     const s=document.createElement("script");
     s.src=src;
-    host.document.head.appendChild(s);
+    document.body.appendChild(s);
   };
 
   if(action==="hello") alert("Hello!");
