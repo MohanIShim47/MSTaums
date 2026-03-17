@@ -16,8 +16,8 @@ if(document.getElementById("scriptix-ui")) return;
 const style=document.createElement("style");
 
 style.textContent=`
-
-:root{
+/* Style has a skill issue UwU OwO :3 */
+#scriptix-ui{
 --ms-bg:rgba(30,30,46,.65);
 --ms-bar:rgba(24,24,37,.75);
 --ms-surface:rgba(49,50,68,.55);
@@ -25,9 +25,6 @@ style.textContent=`
 --ms-text:#cdd6f4;
 --ms-accent:#b4befe;
 --ms-font: "Iosevka Charon Mono", monospace;
-}
-
-#scriptix-ui{
 position:fixed;
 top:80px;
 left:120px;
@@ -275,7 +272,7 @@ ui.innerHTML=`
 
 <div class="ms-sidebar">
 
-<input id="scriptix-search" placeholder="Search Scripts.." style="
+<input id="scriptix-search" placeholder="Search Scripts..." style="
 margin-bottom:12px;
 padding:10px;
 border-radius:8px;
@@ -572,7 +569,7 @@ document.addEventListener("keydown", (e) => {
 
 function setTheme(theme){
 
-const root=document.documentElement;
+const root=document.getElementById("scriptix-ui");
 const a=(r,g,b,o)=>`rgba(${r},${g},${b},${o})`;
 
 if(theme==="macchiato"){
