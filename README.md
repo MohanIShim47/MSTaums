@@ -25,7 +25,7 @@ Scriptix is a **powerful bookmarklet-based UI system** that lets you run scripts
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="src/img/scriptix.png" width="45%">
+  <img src="src/img/scriptix.png" width="100%">
 </p>
 
 ## ✨ Features
