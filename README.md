@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/img/icon.png" width="120px">
+  <img src="src/img/icon.png" width="200px">
 </p>
 
 <h1 align="center">Scriptix</h1>
