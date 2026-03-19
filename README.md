@@ -22,6 +22,8 @@ Scriptix is a **powerful bookmarklet-based UI system** that lets you run scripts
 
 💡 Think of it as a **mini app launcher overlay for the web**.
 
+Also if you found Scriptix to your advantage, please consider staring this repository
+
 ## 📸 Screenshots
 
 <p align="center">
