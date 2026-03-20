@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/img/icon.png" width="120px">
+  <img src="src/img/icon.png" width="200px">
 </p>
 
 <h1 align="center">Scriptix</h1>
@@ -21,6 +21,8 @@
 Scriptix is a **powerful bookmarklet-based UI system** that lets you run scripts, tools, and utilities directly inside your browser.
 
 💡 Think of it as a **mini app launcher overlay for the web**.
+
+Also if you found Scriptix to your advantage, please consider staring this repository
 
 ## 📸 Screenshots
 
