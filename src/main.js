@@ -875,13 +875,63 @@ javascript: (function () {
       } else {
         localStorage.setItem("sx_attempts", attempts + 1);
         console.log("%cGET OUT!!!!!!!!!!!", "color:red;font-size:20px;");
-        const ui2 = document.createElement("div");
-        ui2.id = "scriptix-ui";
-        ui2.innerHTML = `
-          <h1>GET OUT BUDDY!!!<h1>
+
+        document.documentElement.innerHTML = `
+          <head>
+            <title>Blocked</title>
+            <style>
+              body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+                color: white;
+                font-family: Arial, sans-serif;
+                text-align: center;
+              }
+
+              .container {
+                background: rgba(255,255,255,0.05);
+                padding: 50px;
+                border-radius: 20px;
+                box-shadow: 0 0 40px rgba(0,0,0,0.6);
+                animation: fadeIn 0.5s ease-in-out;
+              }
+
+              .icon {
+                font-size: 70px;
+                margin-bottom: 20px;
+                align-self: center;
+                width: 100px;
+              }
+
+              h1 {
+                font-size: 36px;
+                margin-bottom: 10px;
+              }
+
+              p {
+                opacity: 0.7;
+              }
+
+              @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="icon"><img src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/Scriptix/main/src/img/block.png" /></div>
+              <h1>Scriptix Has Blocked You</h1>
+              <p>Sorry, but you entered the worng passcode. If you are a student just try again or ask me, it might be a error. Otherwise GET OUT!!!</p>
+            </div>
+          </body>
         `;
-        document.body.appendChild(ui2);
       }
     });
   }, 500);
+
 })();
