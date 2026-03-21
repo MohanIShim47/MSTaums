@@ -36,12 +36,12 @@ Also if you found Scriptix to your advantage, please consider staring this repos
 
 | V5 Beta | Check |
 |----------|-------------|
-| Ui | [x] |
-| Glow Toggle | [x] |
-| Themes | [x] |
-| Customizability | [x] |
-| Scripts running | [x] |
-| UAF | [x] |
+| Ui | -[x] |
+| Glow Toggle | -[x] |
+| Themes | -[x] |
+| Customizability | -[x] |
+| Scripts running | -[x] |
+| UAF | -[x] |
 
 </p>
 
