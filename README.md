@@ -44,11 +44,10 @@ Also if you found Scriptix to your advantage, please consider staring this repos
 
 </p>
 
-## 🧠 How to Use
+## 🧠 Password
+Due tO SUDO and I, TEDA, deciding this operation should be private we've put a password on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change.
 
-1. Create a new bookmark  
-2. Edit the bookmark  
-3. Paste the code below into the URL field
+Thank you, The Owners of &Phi&Pi$Beta
 
 ## 📋 Changelog
 
