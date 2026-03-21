@@ -47,7 +47,7 @@ Also if you found Scriptix to your advantage, please consider staring this repos
 ## 🧠 Password
 Due tO SUDO and I, TEDA, deciding this operation should be private we've put a password on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change.
 
-Thank you, The Owners of $$ / pi $
+Thank you, The Owners of ΦΠΒ
 
 ## 📋 Changelog
 
