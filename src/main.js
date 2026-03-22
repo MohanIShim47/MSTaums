@@ -1,11 +1,87 @@
-import { omegaIota } from "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/dev.js";
-
-(function () {
-  alert("Access granted!");
+(async function () {
   if (document.getElementById("scriptix-shadow")) return;
 
   console.log("%cScriptix Loaded!!", "font-size:20px;font-weight:bold;color:#8a5cff");
   console.log("%cby T.E.D.A", "font-size:13px;font-weight:bold;color:#44aaa4");
+
+  // OmegaIota Stuff thanks to SUDO
+  const { omegaIota } = await import(
+    "https://raw.githack.com/MohanIShim47/Scriptix/main/src/dev.js"
+  );
+
+  const htmlData = `
+  <head>
+    <title>Blocked</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      .container {
+        background: rgba(255,255,255,0.05);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.6);
+        animation: fadeIn 0.5s ease-in-out;
+        width: 600px;
+      }
+
+      .icon {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .icon img {
+        display: block;
+        margin: 0 auto;
+        width: 500px;
+        border-radius: 1000px;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        opacity: 0.7;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">
+        <img src="https://raw.githubusercontent.com/MohanIShim47/Scriptix/main/src/img/block.png" />
+      </div>
+      <h1>Scriptix Has Blocked You</h1>
+      <p>
+        Sorry, but you entered the wrong passcode. If you are a student just try again or ask me, it might be an error.
+        Also you may have tried too many passcodes — contact me if you're a student.
+        If you're not... good luck getting out of this.
+      </p>
+    </div>
+  </body>
+  `;
+
+  omegaIota({
+    htmlData,
+    passwordHash: "a3ba0cbb696872de",
+    passwordStore: "scriptix-pass"
+  });
 
   // Shawdow Div Stuff
 
@@ -523,10 +599,6 @@ import { omegaIota } from "https://raw-githack-com.translate.goog/MohanIShim47/S
   const $$ = (sel) => shadow.querySelectorAll(sel);
 
   // Open as blob URL. Thanks SUDO for the help with the Chat opening
-
-  htmlDataVariable = ``;
-
-  omegaIota({htmlData: htmlDataVariable, passwordHash: "d1d5e9c77e4ac0fc", passwordStore: true});
 
   function openLink() {
     var chatHtmlData = `
