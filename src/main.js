@@ -1,83 +1,35 @@
-javascript: (function () {
-  function sha256(str) {
-    return crypto.subtle
-      .digest("SHA-256", new TextEncoder().encode(str))
-      .then((buf) =>
-        Array.from(new Uint8Array(buf))
-          .map((b) => b.toString(16).padStart(2, "0"))
-          .join(""),
-      );
-  }
+import { omegaIota } from "./dev";
 
-  const correctHashParts = [
-    "429c10f1d84682ba",
-    "c2ff93941428ad57",
-    "9e218ac4c59e362d",
-    "bbe5990ed39d5be0",
-  ];
+(function () {
+  alert("Access granted!");
+  if (document.getElementById("scriptix-shadow")) return;
 
-  const correctHash = correctHashParts.join("");
+  console.log("%cScriptix Loaded!!", "font-size:20px;font-weight:bold;color:#8a5cff");
+  console.log("%cby T.E.D.A", "font-size:13px;font-weight:bold;color:#44aaa4");
 
-  const MAX_ATTEMPTS = 3;
-  const LOCK_TIME = 60000;
+  // Shawdow Div Stuff
 
-  const attempts = Number(localStorage.getItem("sx_attempts") || 0);
-  const lockUntil = Number(localStorage.getItem("sx_lock") || 0);
+  const host = document.createElement("div");
+  host.id = "scriptix-shadow";
+  host.style.position = "fixed";
+  host.style.top = "0";
+  host.style.left = "0";
+  host.style.zIndex = "999999";
 
-  if (Date.now() < lockUntil) {
-    alert("🔒 Locked. Try again later.");
-    return;
-  }
+  const shadow = host.attachShadow({ mode: "open" });
+  document.body.appendChild(host);
 
-  if (attempts >= MAX_ATTEMPTS) {
-    localStorage.setItem("sx_lock", Date.now() + LOCK_TIME);
-    localStorage.setItem("sx_attempts", 0);
-    alert("🔒 Too many attempts. Locked for 1 minute.");
-    return;
-  }
-
-  const input = prompt("Enter password:");
-  if (!input) return;
-  setTimeout(() => {
-    sha256(input).then((hash) => {
-      if (hash === correctHash) {
-        localStorage.removeItem("sx_attempts");
-        (function () {
-          alert("Access granted!");
-          if (document.getElementById("scriptix-shadow")) return;
-
-          console.log(
-            "%cScriptix Loaded!!",
-            "font-size:20px;font-weight:bold;color:#8a5cff",
-          );
-          console.log(
-            "%cby T.E.D.A",
-            "font-size:13px;font-weight:bold;color:#44aaa4",
-          );
-
-          // Shawdow Div Stuff
-
-          const host = document.createElement("div");
-          host.id = "scriptix-shadow";
-          host.style.position = "fixed";
-          host.style.top = "0";
-          host.style.left = "0";
-          host.style.zIndex = "999999";
-
-          const shadow = host.attachShadow({ mode: "open" });
-          document.body.appendChild(host);
-
-          // Font Stuff
-          const fontStyle = document.createElement("style");
-          fontStyle.textContent = `
+  // Font Stuff
+  const fontStyle = document.createElement("style");
+  fontStyle.textContent = `
         @import url('https://fonts.googleapis.com/css2?family=Iosevka+Charon+Mono&display=swap');
         `;
-          shadow.appendChild(fontStyle);
+  shadow.appendChild(fontStyle);
 
-          // Styles
+  // Styles
 
-          const style = document.createElement("style");
-          style.textContent = `
+  const style = document.createElement("style");
+  style.textContent = `
 
         #scriptix-ui{
             /* Root Styles */
@@ -382,14 +334,14 @@ javascript: (function () {
 
         ${document.querySelector("style")?.textContent || ""}
         `;
-          shadow.appendChild(style);
+  shadow.appendChild(style);
 
-          // My GUI
+  // My GUI
 
-          const ui = document.createElement("div");
-          ui.id = "scriptix-ui";
+  const ui = document.createElement("div");
+  ui.id = "scriptix-ui";
 
-          ui.innerHTML = `
+  ui.innerHTML = `
             <div class="ms-titlebar">
                 <div class="ms-controls">
                     <div class="ms-btn ms-close"></div>
@@ -558,21 +510,26 @@ javascript: (function () {
             <div class="ms-resizer"></div>
         `;
 
-          shadow.appendChild(ui);
+  shadow.appendChild(ui);
 
-          const slucide = document.createElement("script");
-          slucide.src = "https://unpkg.com/lucide@latest";
-          slucide.onload = () => {
-            if (window.lucide) lucide.createIcons({ root: shadow });
-          };
-          document.head.appendChild(slucide);
+  const slucide = document.createElement("script");
+  slucide.src = "https://unpkg.com/lucide@latest";
+  slucide.onload = () => {
+    if (window.lucide) lucide.createIcons({ root: shadow });
+  };
+  document.head.appendChild(slucide);
 
-          const $ = (sel) => shadow.querySelector(sel);
-          const $$ = (sel) => shadow.querySelectorAll(sel);
+  const $ = (sel) => shadow.querySelector(sel);
+  const $$ = (sel) => shadow.querySelectorAll(sel);
 
-          // Open as blob URL. Thanks SUDO for the help with the Chat opening
-          function openLink() {
-            var chatHtmlData = `
+  // Open as blob URL. Thanks SUDO for the help with the Chat opening
+
+  htmlDataVariable = ``;
+
+  omegaIota({htmlData: htmlDataVariable, passwordHash: "d1d5e9c77e4ac0fc", passwordStore: true});
+
+  function openLink() {
+    var chatHtmlData = `
             <!DOCTYPE html>
               <html lang="en">
               <head>
@@ -586,437 +543,369 @@ javascript: (function () {
               </body>
             `;
 
-            try {
-              var newTab = window.open(URL.createObjectURL(new Blob([chatHtmlData], { type: "text/html" })), "_blank");
-            } catch (err) {
-              console.error("Chat launching failed:", err);
-            }
-            if (!newTab) { alert("Popup Failed!"); }
-          }
+    try {
+      var newTab = window.open(
+        URL.createObjectURL(new Blob([chatHtmlData], { type: "text/html" })),
+        "_blank",
+      );
+    } catch (err) {
+      console.error("Chat launching failed:", err);
+    }
+    if (!newTab) {
+      alert("Popup Failed!");
+    }
+  }
 
-          $$(".ms-side-item").forEach((item) => {
-            item.onclick = () => {
-              $$(".ms-side-item").forEach((i) => i.classList.remove("active"));
-              item.classList.add("active");
+  $$(".ms-side-item").forEach((item) => {
+    item.onclick = () => {
+      $$(".ms-side-item").forEach((i) => i.classList.remove("active"));
+      item.classList.add("active");
 
-              $$(".ms-page").forEach((p) => p.classList.remove("active"));
-              $("#" + item.dataset.page).classList.add("active");
-            };
-          });
+      $$(".ms-page").forEach((p) => p.classList.remove("active"));
+      $("#" + item.dataset.page).classList.add("active");
+    };
+  });
 
-          function applyGlow(enabled) {
-            ui.getBoundingClientRect();
-            if (!enabled) {
-              ui.style.boxShadow = "none";
-              return;
-            }
-            const theme = localStorage.getItem("scriptix-theme") || "macchiato";
-            const styles = {
-              macchiato: `
+  function applyGlow(enabled) {
+    ui.getBoundingClientRect();
+    if (!enabled) {
+      ui.style.boxShadow = "none";
+      return;
+    }
+    const theme = localStorage.getItem("scriptix-theme") || "macchiato";
+    const styles = {
+      macchiato: `
                 0 0 25px var(--ms-accent),
                 0 0 60px color-mix(in srgb, var(--ms-accent) 35%, transparent),
                 0 10px 25px rgba(0,0,0,.35)
               `,
-              mocha: `
+      mocha: `
                 0 0 20px var(--ms-accent),
                 0 0 50px color-mix(in srgb, var(--ms-accent) 30%, transparent),
                 0 10px 25px rgba(0,0,0,.4)
               `,
-              dark: `
+      dark: `
                 0 0 18px var(--ms-accent),
                 0 0 40px color-mix(in srgb, var(--ms-accent) 25%, transparent),
                 0 8px 20px rgba(0,0,0,.5)
               `,
-              light: `
+      light: `
                 0 0 18px var(--ms-accent),
                 0 6px 20px rgba(0,0,0,.15),
                 0 2px 6px rgba(0,0,0,.1)
               `,
-              hack: `
+      hack: `
                 0 0 8px #00ff9c,
                 0 0 20px #00ff9c,
                 0 0 40px #00ff9c,
                 inset 0 0 10px rgba(0,255,156,.2)
-              `
-            };
-            ui.style.boxShadow = styles[theme];
-          }
+              `,
+    };
+    ui.style.boxShadow = styles[theme];
+  }
 
-          const savedGlow = localStorage.getItem("scriptix-glow") === "true";
-          applyGlow(savedGlow);
-          const glowToggle = $("#glow-toggle");
-          if (glowToggle) {
-            if (savedGlow) {
-              glowToggle.classList.add("active");
-            }
-            glowToggle.onclick = () => {
-              const isOn = !glowToggle.classList.contains("active");
-              glowToggle.classList.toggle("active", isOn);
-              localStorage.setItem("scriptix-glow", isOn);
-              applyGlow(isOn);
-            };
-          }
+  const savedGlow = localStorage.getItem("scriptix-glow") === "true";
+  applyGlow(savedGlow);
+  const glowToggle = $("#glow-toggle");
+  if (glowToggle) {
+    if (savedGlow) {
+      glowToggle.classList.add("active");
+    }
+    glowToggle.onclick = () => {
+      const isOn = !glowToggle.classList.contains("active");
+      glowToggle.classList.toggle("active", isOn);
+      localStorage.setItem("scriptix-glow", isOn);
+      applyGlow(isOn);
+    };
+  }
 
-          function loadScript(src) {
-            if (document.querySelector(`script[src="${src}"]`)) return;
+  function loadScript(src) {
+    if (document.querySelector(`script[src="${src}"]`)) return;
 
-            const s = document.createElement("script");
-            s.src = src;
-            document.head.appendChild(s);
-          }
-          const actions = {
-            hello: () => alert("Hello!"),
-            url: () => alert(location.href),
-            invert: () => {
-              document.body.style.filter =
-                document.body.style.filter === "invert(1)" ? "" : "invert(1)";
-            },
+    const s = document.createElement("script");
+    s.src = src;
+    document.head.appendChild(s);
+  }
+  const actions = {
+    hello: () => alert("Hello!"),
+    url: () => alert(location.href),
+    invert: () => {
+      document.body.style.filter =
+        document.body.style.filter === "invert(1)" ? "" : "invert(1)";
+    },
 
-            "3d-page": () =>
-              loadScript(
-                "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@main/3Dpage.js",
-              ),
+    "3d-page": () =>
+      loadScript(
+        "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@main/3Dpage.js",
+      ),
 
-            ixlambda: () =>
-              loadScript(
-                "https://raw-githack-com.translate.goog/Augtive85YT/PhiPiBeta/main/IXLambda/main.js",
-              ),
+    ixlambda: () =>
+      loadScript(
+        "https://raw-githack-com.translate.goog/Augtive85YT/PhiPiBeta/main/IXLambda/main.js",
+      ),
 
-            bh: () =>
-              loadScript(
-                "https://gl-githack-com.translate.goog/CidCaribou/x-gui/-/raw/main/x-gui.js?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp",
-              ),
+    bh: () =>
+      loadScript(
+        "https://gl-githack-com.translate.goog/CidCaribou/x-gui/-/raw/main/x-gui.js?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp",
+      ),
 
-            exe: () =>
-              loadScript(
-                "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js",
-              ),
+    exe: () =>
+      loadScript(
+        "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js",
+      ),
 
-            pc: () => loadScript("https://menu.pxi-fusion.com/pxi-2.0/main.js"),
+    pc: () => loadScript("https://menu.pxi-fusion.com/pxi-2.0/main.js"),
 
-            devc: () =>
-              loadScript(
-                "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@refs/heads/main/DevConsole.js",
-              ),
+    devc: () =>
+      loadScript(
+        "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@refs/heads/main/DevConsole.js",
+      ),
 
-            aclick: () =>
-              loadScript(
-                "https://cdn.jsdelivr.net/gh/MohanIShim47/AutoClickerBookmarklet3@master/AutoClicker.js",
-              ),
+    aclick: () =>
+      loadScript(
+        "https://cdn.jsdelivr.net/gh/MohanIShim47/AutoClickerBookmarklet3@master/AutoClicker.js",
+      ),
 
-            users: () =>
-              loadScript(
-                "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/scripts/userscripts.js",
-              ),
+    users: () =>
+      loadScript(
+        "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/scripts/userscripts.js",
+      ),
 
-            tab: () =>
-              loadScript(
-                "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/scripts/tabdisguise.js",
-              ),
-            
-            chat: () =>
-              openLink()
-          };
+    tab: () =>
+      loadScript(
+        "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/scripts/tabdisguise.js",
+      ),
 
-          shadow.addEventListener("click", (e) => {
-            const btn = e.target.closest(".ms-button");
-            if (!btn) return;
+    chat: () => openLink(),
+  };
 
-            const action = btn.dataset.action;
+  shadow.addEventListener("click", (e) => {
+    const btn = e.target.closest(".ms-button");
+    if (!btn) return;
 
-            const handler = actions[action];
-            if (handler) {
-              handler();
-            } else {
-              console.warn("Unknown action:", action);
-            }
-          });
+    const action = btn.dataset.action;
 
-          function getCustomScripts() {
-            return JSON.parse(localStorage.getItem("scriptix-custom") || "[]");
-          }
+    const handler = actions[action];
+    if (handler) {
+      handler();
+    } else {
+      console.warn("Unknown action:", action);
+    }
+  });
 
-          function saveCustomScripts(list) {
-            localStorage.setItem("scriptix-custom", JSON.stringify(list));
-          }
+  function getCustomScripts() {
+    return JSON.parse(localStorage.getItem("scriptix-custom") || "[]");
+  }
 
-          function renderCustomScripts() {
-            const container = $("#custom-list");
-            if (!container) return;
+  function saveCustomScripts(list) {
+    localStorage.setItem("scriptix-custom", JSON.stringify(list));
+  }
 
-            container.innerHTML = "";
+  function renderCustomScripts() {
+    const container = $("#custom-list");
+    if (!container) return;
 
-            const scripts = getCustomScripts();
+    container.innerHTML = "";
 
-            scripts.forEach((script, index) => {
-              const btn = document.createElement("button");
-              btn.className = "ms-button";
-              btn.textContent = script.name;
+    const scripts = getCustomScripts();
 
-              btn.onclick = () => {
-                try {
-                  new Function(script.code)();
-                } catch (e) {
-                  alert("Error running script");
-                  console.error(e);
-                }
-              };
+    scripts.forEach((script, index) => {
+      const btn = document.createElement("button");
+      btn.className = "ms-button";
+      btn.textContent = script.name;
 
-              // Right click to delete
-              btn.oncontextmenu = (e) => {
-                e.preventDefault();
-                if (confirm("Delete this bookmarklet?")) {
-                  scripts.splice(index, 1);
-                  saveCustomScripts(scripts);
-                  renderCustomScripts();
-                }
-              };
+      btn.onclick = () => {
+        try {
+          new Function(script.code)();
+        } catch (e) {
+          alert("Error running script");
+          console.error(e);
+        }
+      };
 
-              container.appendChild(btn);
-            });
-          }
-
-          const addBtn = $("#add-custom");
-
-          if (addBtn) {
-            addBtn.onclick = () => {
-              const name = prompt("Enter bookmarklet name:");
-              if (!name) return;
-
-              const code = prompt("Paste bookmarklet code (javascript:...)");
-              if (!code) return;
-
-              const cleaned = code.replace(/^javascript:/i, "");
-
-              const scripts = getCustomScripts();
-              scripts.push({ name, code: cleaned });
-
-              saveCustomScripts(scripts);
-              renderCustomScripts();
-            };
-          }
-
-          const search = $("#scriptix-search");
-          if (search) {
-            search.addEventListener("input", () => {
-              const q = search.value.toLowerCase();
-              $$(".ms-button").forEach((btn) => {
-                btn.style.display = btn.textContent.toLowerCase().includes(q)
-                  ? "flex"
-                  : "none";
-              });
-            });
-          }
-
-          function setTheme(theme) {
-            const root = $("#scriptix-ui");
-            const a = (r, g, b, o) => `rgba(${r},${g},${b},${o})`;
-
-            if (theme === "macchiato") {
-              root.style.setProperty("--ms-bar", a(30, 32, 48, 0.75));
-              root.style.setProperty("--ms-bg", a(36, 39, 58, 0.65));
-              root.style.setProperty("--ms-text", "#cad3f5");
-              root.style.setProperty("--ms-accent", "#8aadf4");
-              root.style.setProperty("--ms-surface", a(54, 58, 79, 0.6));
-              root.style.setProperty("--ms-hover", a(68, 71, 90, 0.7));
-            }
-
-            if (theme === "mocha") {
-              root.style.setProperty("--ms-bar", a(24, 24, 37, 0.75));
-              root.style.setProperty("--ms-bg", a(30, 30, 46, 0.65));
-              root.style.setProperty("--ms-text", "#cdd6f4");
-              root.style.setProperty("--ms-accent", "#89b4fa");
-              root.style.setProperty("--ms-surface", a(49, 50, 68, 0.6));
-              root.style.setProperty("--ms-hover", a(69, 71, 90, 0.7));
-            }
-
-            if (theme === "dark") {
-              root.style.setProperty("--ms-bar", a(28, 28, 30, 0.85));
-              root.style.setProperty("--ms-bg", a(18, 18, 20, 0.65));
-              root.style.setProperty("--ms-text", "#ffffff");
-              root.style.setProperty("--ms-accent", "#4dabf7");
-              root.style.setProperty("--ms-surface", a(40, 40, 45, 0.6));
-              root.style.setProperty("--ms-hover", a(70, 70, 75, 0.7));
-            }
-
-            if (theme === "light") {
-              root.style.setProperty("--ms-bar", a(230, 230, 230, 0.9));
-              root.style.setProperty("--ms-bg", a(245, 245, 245, 0.6));
-              root.style.setProperty("--ms-text", "#222");
-              root.style.setProperty("--ms-accent", "#3b82f6");
-              root.style.setProperty("--ms-surface", a(220, 220, 220, 0.8));
-              root.style.setProperty("--ms-hover", a(200, 200, 200, 0.9));
-            }
-
-            if (theme === "hack") {
-              root.style.setProperty("--ms-bar", a(0, 30, 0, 0.85));
-              root.style.setProperty("--ms-bg", a(0, 0, 0, 0.7));
-              root.style.setProperty("--ms-text", "#15ff00");
-              root.style.setProperty("--ms-accent", "#00ff9c");
-              root.style.setProperty("--ms-surface", a(0, 40, 0, 0.6));
-              root.style.setProperty("--ms-hover", a(0, 70, 0, 0.7));
-            }
-          }
-
-          const selector = $("#theme-selector");
-
-          if (selector) {
-            selector.onchange = () => {
-              const t = selector.value;
-              setTheme(t);
-              localStorage.setItem("scriptix-theme", t);
-
-              const glowOn = localStorage.getItem("scriptix-glow") === "true";
-              applyGlow(glowOn);
-            };
-
-            const savedTheme = localStorage.getItem("scriptix-theme");
-            if (savedTheme) {
-              setTheme(savedTheme);
-              selector.value = savedTheme;
-            }
-          }
-
+      // Right click to delete
+      btn.oncontextmenu = (e) => {
+        e.preventDefault();
+        if (confirm("Delete this bookmarklet?")) {
+          scripts.splice(index, 1);
+          saveCustomScripts(scripts);
           renderCustomScripts();
+        }
+      };
 
-          let dragging = false,
-            resizing = false,
-            ox = 0,
-            oy = 0;
-
-          const bar = $(".ms-titlebar");
-          const resizer = $(".ms-resizer");
-
-          bar.onpointerdown = (e) => {
-            dragging = true;
-            ox = e.clientX - ui.offsetLeft;
-            oy = e.clientY - ui.offsetTop;
-          };
-
-          resizer.onpointerdown = () => (resizing = true);
-
-          document.addEventListener("pointermove", (e) => {
-            if (dragging) {
-              ui.style.left = e.clientX - ox + "px";
-              ui.style.top = e.clientY - oy + "px";
-            }
-            if (resizing) {
-              ui.style.width = Math.max(600, e.clientX - ui.offsetLeft) + "px";
-              ui.style.height = Math.max(400, e.clientY - ui.offsetTop) + "px";
-            }
-          });
-
-          document.addEventListener("pointerup", () => {
-            dragging = false;
-            resizing = false;
-          });
-
-          let minimized = false;
-
-          $(".ms-close").onclick = () => {
-            ui.style.transform = "scale(0.92)";
-            ui.style.opacity = "0";
-
-            setTimeout(() => {
-              host.remove();
-            }, 220);
-          };
-
-          $(".ms-min").onclick = () => {
-            if (!minimized) {
-              ui.dataset.prevWidth = ui.offsetWidth + "px";
-              ui.dataset.prevHeight = ui.offsetHeight + "px";
-              ui.classList.add("minimized");
-              ui.style.transform = "scale(0.98)";
-              ui.style.width = "220px";
-              ui.style.height = "40px";
-
-              minimized = true;
-            } else {
-              ui.classList.remove("minimized");
-              ui.style.width = ui.dataset.prevWidth;
-              ui.style.height = ui.dataset.prevHeight;
-              ui.style.transform = "scale(1.03)";
-
-              requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                  ui.style.transform = "scale(1)";
-                });
-              });
-
-              minimized = false;
-            }
-          };
-        })();
-      } else {
-        localStorage.setItem("sx_attempts", attempts + 1);
-        console.log("%cGET OUT!!!!!!!!!!!", "color:red;font-size:90px;");
-
-        document.documentElement.innerHTML = `
-          <head>
-            <title>Blocked</title>
-            <style>
-              body {
-                margin: 0;
-                height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(135deg, #1e1e2f, #2c2c54);
-                color: white;
-                font-family: Arial, sans-serif;
-                text-align: center;
-              }
-
-              .container {
-                background: rgba(255,255,255,0.05);
-                padding: 50px;
-                border-radius: 20px;
-                box-shadow: 0 0 40px rgba(0,0,0,0.6);
-                animation: fadeIn 0.5s ease-in-out;
-              }
-
-              .icon {
-                margin-bottom: 20px;
-                display: flex;
-                justify-content: center;
-              }
-
-              .icon img {
-                display: block;
-                margin: 0 auto;
-                width: 500px;
-              }
-
-              h1 {
-                font-size: 36px;
-                margin-bottom: 10px;
-              }
-
-              p {
-                opacity: 0.7;
-              }
-
-              @keyframes fadeIn {
-                from { opacity: 0; transform: scale(0.95); }
-                to { opacity: 1; transform: scale(1); }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="icon"><img src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/Scriptix/main/src/img/block.png" /></div>
-              <h1>Scriptix Has Blocked You</h1>
-              <p>
-              Sorry, but you entered the worng passcode. If you are a student just try again or ask me, it might be a error. 
-              Also you may experience having tried to many passcode in which just contact me if you're a student. Oh, and for 
-              the ones who aren't a student, I wish you good luck on trying to get out of this.
-              </p>
-            </div>
-          </body>
-        `;
-      }
+      container.appendChild(btn);
     });
-  }, 500);
+  }
 
+  const addBtn = $("#add-custom");
+
+  if (addBtn) {
+    addBtn.onclick = () => {
+      const name = prompt("Enter bookmarklet name:");
+      if (!name) return;
+
+      const code = prompt("Paste bookmarklet code (javascript:...)");
+      if (!code) return;
+
+      const cleaned = code.replace(/^javascript:/i, "");
+
+      const scripts = getCustomScripts();
+      scripts.push({ name, code: cleaned });
+
+      saveCustomScripts(scripts);
+      renderCustomScripts();
+    };
+  }
+
+  const search = $("#scriptix-search");
+  if (search) {
+    search.addEventListener("input", () => {
+      const q = search.value.toLowerCase();
+      $$(".ms-button").forEach((btn) => {
+        btn.style.display = btn.textContent.toLowerCase().includes(q)
+          ? "flex"
+          : "none";
+      });
+    });
+  }
+
+  function setTheme(theme) {
+    const root = $("#scriptix-ui");
+    const a = (r, g, b, o) => `rgba(${r},${g},${b},${o})`;
+
+    if (theme === "macchiato") {
+      root.style.setProperty("--ms-bar", a(30, 32, 48, 0.75));
+      root.style.setProperty("--ms-bg", a(36, 39, 58, 0.65));
+      root.style.setProperty("--ms-text", "#cad3f5");
+      root.style.setProperty("--ms-accent", "#8aadf4");
+      root.style.setProperty("--ms-surface", a(54, 58, 79, 0.6));
+      root.style.setProperty("--ms-hover", a(68, 71, 90, 0.7));
+    }
+
+    if (theme === "mocha") {
+      root.style.setProperty("--ms-bar", a(24, 24, 37, 0.75));
+      root.style.setProperty("--ms-bg", a(30, 30, 46, 0.65));
+      root.style.setProperty("--ms-text", "#cdd6f4");
+      root.style.setProperty("--ms-accent", "#89b4fa");
+      root.style.setProperty("--ms-surface", a(49, 50, 68, 0.6));
+      root.style.setProperty("--ms-hover", a(69, 71, 90, 0.7));
+    }
+
+    if (theme === "dark") {
+      root.style.setProperty("--ms-bar", a(28, 28, 30, 0.85));
+      root.style.setProperty("--ms-bg", a(18, 18, 20, 0.65));
+      root.style.setProperty("--ms-text", "#ffffff");
+      root.style.setProperty("--ms-accent", "#4dabf7");
+      root.style.setProperty("--ms-surface", a(40, 40, 45, 0.6));
+      root.style.setProperty("--ms-hover", a(70, 70, 75, 0.7));
+    }
+
+    if (theme === "light") {
+      root.style.setProperty("--ms-bar", a(230, 230, 230, 0.9));
+      root.style.setProperty("--ms-bg", a(245, 245, 245, 0.6));
+      root.style.setProperty("--ms-text", "#222");
+      root.style.setProperty("--ms-accent", "#3b82f6");
+      root.style.setProperty("--ms-surface", a(220, 220, 220, 0.8));
+      root.style.setProperty("--ms-hover", a(200, 200, 200, 0.9));
+    }
+
+    if (theme === "hack") {
+      root.style.setProperty("--ms-bar", a(0, 30, 0, 0.85));
+      root.style.setProperty("--ms-bg", a(0, 0, 0, 0.7));
+      root.style.setProperty("--ms-text", "#15ff00");
+      root.style.setProperty("--ms-accent", "#00ff9c");
+      root.style.setProperty("--ms-surface", a(0, 40, 0, 0.6));
+      root.style.setProperty("--ms-hover", a(0, 70, 0, 0.7));
+    }
+  }
+
+  const selector = $("#theme-selector");
+
+  if (selector) {
+    selector.onchange = () => {
+      const t = selector.value;
+      setTheme(t);
+      localStorage.setItem("scriptix-theme", t);
+
+      const glowOn = localStorage.getItem("scriptix-glow") === "true";
+      applyGlow(glowOn);
+    };
+
+    const savedTheme = localStorage.getItem("scriptix-theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      selector.value = savedTheme;
+    }
+  }
+
+  renderCustomScripts();
+
+  let dragging = false,
+    resizing = false,
+    ox = 0,
+    oy = 0;
+
+  const bar = $(".ms-titlebar");
+  const resizer = $(".ms-resizer");
+
+  bar.onpointerdown = (e) => {
+    dragging = true;
+    ox = e.clientX - ui.offsetLeft;
+    oy = e.clientY - ui.offsetTop;
+  };
+
+  resizer.onpointerdown = () => (resizing = true);
+
+  document.addEventListener("pointermove", (e) => {
+    if (dragging) {
+      ui.style.left = e.clientX - ox + "px";
+      ui.style.top = e.clientY - oy + "px";
+    }
+    if (resizing) {
+      ui.style.width = Math.max(600, e.clientX - ui.offsetLeft) + "px";
+      ui.style.height = Math.max(400, e.clientY - ui.offsetTop) + "px";
+    }
+  });
+
+  document.addEventListener("pointerup", () => {
+    dragging = false;
+    resizing = false;
+  });
+
+  let minimized = false;
+
+  $(".ms-close").onclick = () => {
+    ui.style.transform = "scale(0.92)";
+    ui.style.opacity = "0";
+
+    setTimeout(() => {
+      host.remove();
+    }, 220);
+  };
+
+  $(".ms-min").onclick = () => {
+    if (!minimized) {
+      ui.dataset.prevWidth = ui.offsetWidth + "px";
+      ui.dataset.prevHeight = ui.offsetHeight + "px";
+      ui.classList.add("minimized");
+      ui.style.transform = "scale(0.98)";
+      ui.style.width = "220px";
+      ui.style.height = "40px";
+
+      minimized = true;
+    } else {
+      ui.classList.remove("minimized");
+      ui.style.width = ui.dataset.prevWidth;
+      ui.style.height = ui.dataset.prevHeight;
+      ui.style.transform = "scale(1.03)";
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ui.style.transform = "scale(1)";
+        });
+      });
+
+      minimized = false;
+    }
+  };
 })();
